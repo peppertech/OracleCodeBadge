@@ -7,7 +7,12 @@
 
 module.exports = function (configObj) {
   return new Promise((resolve, reject) => {
-  	console.log("Running after_build hook.");
+    console.log("Running after_build hook.");
+    // console.log('configObj: '+ JSON.stringify(configObj));
+    if(configObj.buildType === 'release'){
+      // do something here to copy production files to /dist folder
+      // which can then be used with a dockerfile
+    }
   	resolve();
   });
 };
