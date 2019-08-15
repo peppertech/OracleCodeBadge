@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Code Card Designer</title>
+
+  <meta charset="UTF-8">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <meta name="Title" content="Code Card | Oracle Code One 2019">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<!-- injector:theme -->
+<link rel="stylesheet" href="css/alta/7.1.0/web/alta.min.css" id="css" />
+<!-- endinjector -->
+
+  <!-- This is where you would add any app specific styling -->
+  <link rel="stylesheet" href="css/app.css" type="text/css" />
+</head>
+
+<body>
+  <div id="codecard">
+    <div class="container">
+      <oj-button id="loginBtn" style="color:white;" class="logged" chroming="half"
+        on-oj-action="[[loginDialogHandler]]">
+        <span>
+          <oj-bind-text value="[[loggedInStatus]]"></oj-bind-text>
+        </span>
+      </oj-button>
+      <img id="prev" :src="[[appIcons.prev.src]]" class="prev" on-click="[[changeTemplate]]">
+      <div class="cards">
+        <div id="badge" class="badge">
+          <div class="display">
+            <div :style="[[showAlertMessage()]]">
+              <span class="alertMesage">
+                <oj-bind-text value="[[alertMessage()]]"></oj-bind-text>
+              </span>
+            </div>
+            <div :style="[[showContent()]]">
+              <div id="layoutTemplate" :class="[[template()]]">
+                <oj-bind-if test="[[template() === 'template8' || template() === 'template7']]">
+                  <img :src="[[appIcons.oracle.src]]" class="backgroundImage">
+                </oj-bind-if>
+                <div :style="[[showHide]]">
+                  <img id="iconImage" on-click="[[openDialog]]" :src="[[badgeIcon]]" class="icon">
+                  <oj-input-text id="tmplTitle" value="{{title}}" placeholder="{{title}}" class="title"></oj-input-text>
+                  <oj-input-text id="tmplSubTitle" value="{{subtitle}}" class="subtitle">
+                  </oj-input-text>
+                  <oj-text-area id="tmplBody" value="{{bodytext}}" rows="3" class="bodytext"></oj-text-area>
+                </div>
+              </div>
+            </div>
+            <div class="color-background">
+              <img id="whiteBG" :src="[[appIcons.whiteBG.src]]" on-click="[[function(){setBackgroundColor('white')}]]">
+              <img id="blackBG" :src="[[appIcons.blackBG.src]]" on-click="[[function(){setBackgroundColor('black')}]]">
+            </div>
+          </div>
+          <oj-button 
+            id="btnA" 
+            display="icons" 
+            chroming="half" 
+            on-mousedown="[[startTimer]]" 
+            on-mouseup="[[stopTimer]]"  
+            on-touchstart="[[startTimer]]"  
+            on-touchend="[[stopTimer]]">
+            <img slot="startIcon" :src="[[appIcons.A.src]]" class="a">
+          </oj-button>
+          <oj-button 
+            id="btnB" 
+            display="icons" 
+            chroming="half" 
+            on-mousedown="[[startTimer]]" 
+            on-mouseup="[[stopTimer]]"  
+            on-touchstart="[[startTimer]]"  
+            on-touchend="[[stopTimer]]">
+            <img slot="startIcon" :src="[[appIcons.B.src]]" class="b">
+          </oj-button>
+        </div>
+        <div class="json json">
+          <code id="code">
+            {
+              <br >
+              &nbsp;&nbsp;"template": <span >"<span >template1</span>"</span>,<br >
+              &nbsp;&nbsp;"title": <span >"<span ></span>"</span><br >
+              &nbsp;&nbsp;"subtitle": <span >"<span ></span>"</span><br >
+              &nbsp;&nbsp;"bodytext": <span >"<span ></span>"</span><br >
+              &nbsp;&nbsp;"icon": <span >"<span ></span>"</span><br >
+              &nbsp;&nbsp;"backgroundImage": <span >"<span ></span>"</span><br >
+              &nbsp;&nbsp;"backgroundColor": <span >"<span >white</span>"</span><br >
+              &nbsp;&nbsp;"fingerprint": <span >"<span >6F 9C C2 BF 5B BD F0 50 EA 6E 70 10 19 DF 32 CD 79 01 4C 67</span>"</span><br >
+              &nbsp;&nbsp;"badge": <span >"<span ></span>"</span><br >
+              &nbsp;&nbsp;"barcode": <span >"<span >AI9324LSF03</span>"</span><br >
+            }
+          </code>
+        </div>
+        <span style="margin-left: 50px;">
+          <oj-bind-text value="[[idValue]]"></oj-bind-text>
+        </span>
+      </div>
+      <img id="next" :src="[[appIcons.next.src]]" class="next" on-click="[[changeTemplate]]">
+      <div class="controls">
+        <p>
+          <oj-select-one options="[[actions]]" value="{{actionValue}}" style="max-width: 125px;"></oj-select-one>
+          <oj-button id="saveDesign" class="save largeFont right oj-button-primary" chroming="half"
+            on-oj-action="[[saveDesign]]">Save</oj-button>
+        </p>
+      </div>
+    </div>
+
+    <!-- Login dialog START -->
+    <oj-dialog style="display:none" id="loginDialog" dialog-title="Login" position.of="#badge"
+      position.my.horizontal="start" position.my.vertical="top" position.at.horizontal="start"
+      position.at.vertical="top">
+      <div slot="body">
+        <div class="login">
+          <div class="login-container">
+            <oj-form-layout>
+              <oj-input-text id="badgeId" label-hint="Code Card Id" value="{{idValue}}"
+                on-raw-value-changed="[[forceUpperCase]]"></oj-input-text>
+              <oj-button id="barcodeBtn" display="icons" chroming="outlined" on-oj-action="[[openScanner]]"
+                class="barcode-button">
+                <span slot="startIcon" class="barcode icon-barcode"></span>
+              </oj-button>
+              <oj-input-text id="badgeName" label-hint="Your name (optional)" value="{{nameValue}}"></oj-input-text>
+            </oj-form-layout>
+            <oj-button id="loginActionBtn" class="oj-button-confirm" on-oj-action="[[loginAction]]">Login</oj-button>
+          </div>
+        </div>
+      </div>
+    </oj-dialog>
+    <!-- Login dialog END -->
+
+    <!-- Icon selection dialog START -->
+    <oj-dialog style="display:none" id="iconSelectDialog" dialog-title="Choose Icon" position.of="#badge"
+      position.my.horizontal="start" position.my.vertical="top" position.at.horizontal="start"
+      position.at.vertical="top">
+      <div slot="body">
+        <div class="image-chooser">
+          <div class="image-grid">
+            <oj-bind-for-each data="[[iconset]]">
+              <template data-oj-as="icon">
+                <img :id="[[icon.data.name]]" :src="[[icon.data.src]]" on-click="[[changeIcon]]" class="icon-list">
+              </template>
+            </oj-bind-for-each>
+          </div>
+        </div>
+      </div>
+    </oj-dialog>
+    <!-- Icon selection dialog END -->
+
+    <!-- Barcode Scanner dialog START -->
+    <oj-dialog style="display:none" id="scannerDialog" dialog-title="Scan" position.of="#badge"
+      position.my.horizontal="start" position.my.vertical="top" position.at.horizontal="start"
+      position.at.vertical="top" on-oj-before-close="[[cleanupScanner]]">
+      <div slot="body">
+        <div class="login">
+          <div class="login-container">
+            <div id="scanner-container"></div>
+            <!-- <input type="button" id="btn" value="Start/Stop the scanner" />
+            <img id="img" src="img/barcode.gif" /> -->
+          </div>
+        </div>
+    </oj-dialog>
+    <!-- Barcode Scanner dialog END -->
+
+
+  </div>
+
+  <script type="text/javascript" src="js/libs/require/require.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+
+</body>
+
+</html>

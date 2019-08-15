@@ -5,6 +5,7 @@
   "dependencies": {
     "@oracle/oraclejet": "~7.1.0",
     "@zxing/library": "^0.14.2",
+    "fs-extra": "^8.1.0",
     "quagga": "^0.12.1"
   },
   "devDependencies": {
