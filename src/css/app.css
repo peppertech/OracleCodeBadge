@@ -601,7 +601,7 @@ a {
   font-family:  'FreeSansBold', sans-serif, Arial, Helvetica;
   font-weight: 700;
   font-size: 13.2pt;
-  left: 25px;
+  left: 20px;
   top: 65px;
   max-width: 238px;
   z-index: 30;
@@ -609,11 +609,11 @@ a {
 
 .template9 .subtitle {
   position: absolute;
-  left: 25px;
+  left: 20px;
   top: 90px;
   font-family: 'FreeMono', sans-serif, Arial, Helvetica;
   font-weight: 400;
-  font-size: 13.2pt;
+  font-size: 11.8pt;
   max-width: 238px;
   z-index: 20;
 }
@@ -691,7 +691,7 @@ a {
 }
 
 .template11 .subtitle {
-  bottom: -5px;
+  bottom: -8px;
   font-weight: 400;
   font-size: 12.5pt;
   z-index: 20;
