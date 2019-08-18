@@ -425,7 +425,8 @@ define([
             bodytext.setAttribute('maxlength', '170');
             break;
           case 'template5':
-            title.style.height = '40px';
+            title.style.height = '42px';
+            title.style.fontKerning = "normal";
             title.style.textAlign = 'center';
             title.setAttribute('maxlength', '15')
             subtitle.setAttribute('maxlength', '25');
@@ -433,7 +434,8 @@ define([
             bodytext.setAttribute('maxlength', '170');
             break;
           case 'template6':
-            title.style.height = '36px';
+            title.style.height = '42px';
+            title.style.fontKerning = "normal";
             title.style.textAlign = 'center';
             title.setAttribute('maxlength', '15')
             subtitle.setAttribute('maxlength', '25');
@@ -455,7 +457,7 @@ define([
             subtitle.setAttribute('maxlength', '50');
             break;
           case 'template10':
-            title.style.height = '36px';
+            title.style.height = '42px';
             title.setAttribute('maxlength', '15')
             subtitle.setAttribute('maxlength', '26');
             bodytext.setAttribute('maxlength', '65');
@@ -463,6 +465,7 @@ define([
           case 'template11':
             title.setAttribute('maxlength', '22')
             title.style.textAlign = 'center';
+            title.style.fontKerning = "normal";
             subtitle.setAttribute('maxlength', '26');
             subtitle.style.textAlign = 'center';
             subtitle.style.height = '24px';
