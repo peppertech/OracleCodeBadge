@@ -114,7 +114,9 @@ define([
 
       self.loginAction = (event, data) => {
         if (self.idValue().length > 0) {
-          remoteLogin(self.idValue()).then(reponse => {
+          let upperId = self.idValue().toLocaleUpperCase();
+          self.idValue(upperId);
+          remoteLogin(upperId).then(reponse => {
             window.localStorage.setItem('badgeId', self.idValue());
             window.localStorage.setItem('badgeName', self.nameValue());
             self.loggedInStatus('Logout ' + self.nameValue());
@@ -143,7 +145,7 @@ define([
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            "badgeId": self.idValue(),
+            "badgeId": self.idValue().toLocaleUpperCase(),
             "badgeName": self.nameValue()
           })
         }).then(response => response.json());

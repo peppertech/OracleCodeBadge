@@ -114,12 +114,12 @@
         <div class="login">
           <div class="login-container">
             <oj-form-layout>
-              <oj-input-text id="badgeId" label-hint="Code Card Id" value="{{idValue}}"
-                on-raw-value-changed="[[forceUpperCase]]"></oj-input-text>
-              <oj-button id="barcodeBtn" display="icons" chroming="outlined" on-oj-action="[[openScanner]]"
+              <oj-input-text id="badgeId" label-hint="Code Card Id" value="{{idValue}}"></oj-input-text> 
+                <!-- on-raw-value-changed="[[forceUpperCase]]" -->
+              <!-- <oj-button id="barcodeBtn" display="icons" chroming="outlined" on-oj-action="[[openScanner]]"
                 class="barcode-button">
                 <span slot="startIcon" class="barcode icon-barcode"></span>
-              </oj-button>
+              </oj-button> -->
               <oj-input-text id="badgeName" label-hint="Your name (optional)" value="{{nameValue}}"></oj-input-text>
             </oj-form-layout>
             <oj-button id="loginActionBtn" class="oj-button-confirm" on-oj-action="[[loginAction]]">Login</oj-button>
